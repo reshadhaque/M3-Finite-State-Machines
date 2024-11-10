@@ -33,7 +33,32 @@ end
 
 //Next State Logic
 
+always_comb 
+begin
+    case(state_reg)
+    zero:
+        if(sw)
+            state_next = wait1_1;
+        else
+            state_next = zero;
+    wait1_1:
+        if(sw)
+            if(m_tick)
+                state_next = wait1_2;
+            else
+                state_next = wait1_1;
+        else
+            state_next = zero;
+    wait1_2:
 
+    wait1_3:
+    one:
+    wait0_1:
+    wait0_2:
+    wait0_3:
+    endcase
+    default: state_next = zero;
+end
 
 
 endmodule
