@@ -5,10 +5,9 @@ module mod_m_counter
         output logic max_tick,
         output logic [3:0]q
     );
-
-    parameter N = 4;
-
-
+    //N is a constant representing the number of bits for the counter
+    localparam N = $clog2(M);
+    //Signal Declaration
     logic [N-1:0] r_next, r_reg;
 
     always_ff@(posedge clk, posedge reset)
