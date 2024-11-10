@@ -1,9 +1,9 @@
 `timescale 1ns / 1ps
 
 module rising_edge_detect_mealy(
-    input clk, reset;
-    input level;
-    output tick;
+    input logic clk, reset;
+    input logic level;
+    output logic tick;
 )
 
 typedef enum (zero, one) state_type;
