@@ -9,7 +9,7 @@ module fsm_multi_segment(
 typedef enum (s0, s1, s2) state_type;
 //signal declaration
 state_type state_reg, state_next;
-//1. State Register
+//1. State Register Logic
 always_ff@(posedge clk, posedge reset)
 begin
     if(reset)
@@ -20,7 +20,9 @@ end
 
 //2. Combinational Next State Logic, Ouput Mealy and Moore Logic
 always_comb begin
-    y1 = 1'b0; //De Asserting y0 so there is no inferred latch
+    y1 = 1'b0; //De Asserting inputs so there is no inferred latch
+    y0 = 1'b0;
+    state_next = s0;
     case(state_reg)
     s0: 
     begin
