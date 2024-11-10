@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 
 module fsm_multi_segment(
-    input logic clk, reset;
-    input logic a, b;
-    output logic y0, y1;
+    input logic clk, reset,
+    input logic a, b,
+    output logic y0, y1
 );
 
-typedef enum (s0, s1, s2) state_type;
+typedef enum {s0, s1, s2} state_type;
 //signal declaration
 state_type state_reg, state_next;
 //1. State Register

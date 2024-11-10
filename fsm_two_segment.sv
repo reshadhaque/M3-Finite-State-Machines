@@ -6,7 +6,7 @@ module fsm_multi_segment(
     output logic y0, y1;
 );
 
-typedef enum (s0, s1, s2) state_type;
+typedef enum {s0, s1, s2} state_type;
 //signal declaration
 state_type state_reg, state_next;
 //1. State Register Logic

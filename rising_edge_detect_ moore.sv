@@ -1,17 +1,17 @@
 `timescale 1ns / 1ps
 
 module rising_edge_detect_moore(
-    input logic clk, reset;
-    input logic level;
-    output logic tick;
+    input logic clk, reset,
+    input logic level,
+    output logic tick
 );
 
-typedef enum (zero, edg, one) state_type;
+typedef enum {zero, edg, one} state_type;
 state_type state_reg, state_next;
 
 
 //State Register
-always_ff@(posedge_clk, posedge reset)
+always_ff@(posedge clk, posedge reset)
 begin
     if(reset)
         state_reg <= zero;
