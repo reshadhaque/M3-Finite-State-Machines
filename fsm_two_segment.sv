@@ -18,11 +18,13 @@ begin
         state_reg <= state_next;
 end
 
-//2. Next State Logic
+//2. Combinational Next State Logic, Ouput Mealy and Moore Logic
 always_comb begin
+    y1 = 1'b0; //De Asserting y0 so there is no inferred latch
     case(state_reg)
     s0: 
     begin
+        y1 = 1'b1;
         if(a)
             if(b)
             begin
@@ -35,20 +37,17 @@ always_comb begin
             state_next = s0;
     end
     s1:
+    begin
+        y1 = 1'b1;
         if(a)
             state_next = s0;
         else 
             state_next = s1;
-
+    end
     s2:
         state_next = s0;
     default: state_next <= s0;
     endcase
 end
-
-//3. Mealy Output
-assign y0 = (state_reg == s0) & a & b;
-//4. Moore Output
-assign y1 = (state_reg == s0) || (state_reg == s1);
 
 endmodule
