@@ -10,7 +10,7 @@ module delayed_debouncer(
 //assuming clk is 50Mhz (clock period is 50MHz OR 20 ns on Cyclone V FPGA)
 //10ms / 20 ns is 10e-3 / 20e-9 which is 500_000
 logic m_tick;
-mod_m_count #(.M(500_000)) ticker (
+mod_m_counter #(.M(500_000)) ticker (
     .clk(clk),
     .reset(reset),
     .q(),
@@ -26,7 +26,7 @@ state_type state_reg, state_next;
 always_ff@(posedge clk, posedge reset)
 begin
     if(reset)
-        state_reg <= zerol
+        state_reg <= zero;
     else
         state_reg <= state_next;
 end
@@ -77,7 +77,7 @@ begin
             else
                 state_next = wait0_2;
         else
-            state = one;
+            state_next = one;
     wait0_2:
         if(~sw)
             if(~m_tick)
@@ -85,7 +85,7 @@ begin
             else
                 state_next = wait0_3;
         else
-            state = one;
+            state_next = one;
     wait0_3:
         if(~sw)
             if(~m_tick)
@@ -93,7 +93,7 @@ begin
             else
                 state_next = zero;
         else
-            state = one;
+            state_next = one;
     default: state_next = zero;
     endcase
 end
