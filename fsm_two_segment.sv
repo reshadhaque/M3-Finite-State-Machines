@@ -22,14 +22,18 @@ end
 always_comb begin
     case(state_reg)
     s0: 
+    begin
         if(a)
             if(b)
+            begin
                 state_next = s2;
+                y0 = 1'b1;
+            end
             else    
                 state_next = s1;
         else
             state_next = s0;
-
+    end
     s1:
         if(a)
             state_next = s0;
