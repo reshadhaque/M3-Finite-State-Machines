@@ -50,15 +50,59 @@ begin
         else
             state_next = zero;
     wait1_2:
-
+        if(sw)
+            if(m_tick)
+                state_next = wait1_3;
+            else
+                state_next = wait1_2;
+        else
+            state_next = zero;
     wait1_3:
+        if(sw)
+            if(m_tick)
+                state_next = one;
+            else
+                state_next = wait1_3;
+        else
+            state_next = zero;
     one:
+        if(~sw)
+            state_next = wait0_1;
+        else
+            state_next = one;
     wait0_1:
+        if(~sw)
+            if(~m_tick)
+                state_next = wait0_1;
+            else
+                state_next = wait0_2;
+        else
+            state = one;
     wait0_2:
+        if(~sw)
+            if(~m_tick)
+                state_next = wait0_2;
+            else
+                state_next = wait0_3;
+        else
+            state = one;
     wait0_3:
-    endcase
+        if(~sw)
+            if(~m_tick)
+                state_next = wait0_3;
+            else
+                state_next = zero;
+        else
+            state = one;
     default: state_next = zero;
+    endcase
 end
 
+//Moore output logic
 
+assign db = ((state_reg == one) || 
+            (state_reg == wait0_1) || 
+            (state_reg == wait0_2) ||
+            (state_reg == wait0_3));
+            
 endmodule
