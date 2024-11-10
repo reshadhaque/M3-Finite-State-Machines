@@ -49,7 +49,7 @@ begin
 
     repeat(3) @(posedge clk);
 
-    $finish;
+    $stop;
 end
 
 endmodule
