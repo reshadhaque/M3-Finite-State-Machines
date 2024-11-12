@@ -33,19 +33,19 @@ logic dbtick;
 logic q;
 logic dbq;
 
-delayed_debouncer debouncer(.sw(~KEY[0]), .reset(~KEY[1]), .clk(CLOCK_50), .db(db));
+delayed_debouncer debouncer(.sw(~KEY[0]), .reset(), .clk(CLOCK_50), .db(db));
 
-rising_edge_detect_mealy sw_edge(.clk(CLOCK_50), .reset(~KEY[1]), .level(KEY[0]), .tick(tick));
+rising_edge_detect_mealy sw_edge(.clk(CLOCK_50), .reset(), .level(~KEY[0]), .tick(tick));
 
-rising_edge_detect_mealy dw_edge(.clk(CLOCK_50), .reset(~KEY[1]), .level(db), .tick(dbtick));
+//rising_edge_detect_mealy dw_edge(.clk(CLOCK_50), .reset(~KEY[1]), .level(db), .tick(dbtick));
 
-binary_counter #(4)sw_counter(.clk(CLOCK_50), .reset(~KEY[1]), .en(tick), .max_tick(), .q(q));
+binary_counter #(4)sw_counter(.clk(CLOCK_50), .reset(), .en(tick), .max_tick(), .q(q));
 
-binary_counter #(4)sw_counter(.clk(CLOCK_50), .reset(~KEY[1]), .en(dbtick), .max_tick(), .q(dbq));
+//binary_counter #(4)db_counter(.clk(CLOCK_50), .reset(~KEY[1]), .en(dbtick), .max_tick(), .q(dbq));
 
-displayhex hex1(.q(q), .sseq(HEX0));
+displayhex hex1(.q(q), .sseg(HEX0));
 
-displayhex hex2(.q(dbq), .sseq(HEX1));
+//displayhex hex2(.q(dbq), .sseg(HEX1));
 
 
 endmodule
