@@ -10,7 +10,7 @@ module binary_counter
 
     logic [N-1:0] r_next, r_reg;
 
-    always_ff@(posedge clk)
+    always_ff@(posedge clk, posedge reset)
     begin
         if (reset)
             r_reg <= 0;
