@@ -49,6 +49,7 @@ module time_mux_disp(
     mux #(.BITS(6)) mux0(
                     .sel(controller_counter),
                     .mux_out(to_display),
+                    .*); // Automatically capture all inputs
                     
     decoder  #(.N(3)) decoder0(
                     .in(controller_counter),
